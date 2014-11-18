@@ -7,7 +7,7 @@
         <methods>
           <include name="beforeClass"/>
           <include name="afterClass"/>
-          <include name="verifyResultInfo"/>
+          <include name="verifySearchTerm"/>
         </methods>
       </class> <!-- testCases.VerifySearchResult -->
     </classes>

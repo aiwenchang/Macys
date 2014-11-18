@@ -1,6 +1,7 @@
 package pageObject;
 
 import java.awt.PageAttributes.PrintQualityType;
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -11,33 +12,30 @@ import util.Driver;
 
 
 public class JeansResultPage {
-// @FindBy(id)
+
 
 /**
 * @param nothing is passed in
+ * @return 
 */
-public static void getLinks() {
+	
+
+public static List<WebElement> getLinks() {
 try {
 //driver.findElement(By.id("element id"))
 WebElement landingpage = Driver.driver.findElement(By.id("search_landing_product"));
+List<WebElement> productslist =landingpage.findElements(By.className("shortDescription"));
 
+for (WebElement product : productslist) {
+System.out.println(product.findElement(By.tagName("a")).getAttribute("href"));
+System.out.println(product.findElement(By.tagName("a")).getText());
+System.out.println("");
 
-//List<WebElement> productslist = 
-//landingpage.findElements(By.className("shortDescription"));
-
-//driver.findElement(By.className("element class"))
-
-//assertEquals(20, links.size());
-//System.out.println(productslist.size());
-
-//for (WebElement product : productslist) {
-//System.out.println(product.findElement(By.tagName("a")).getAttribute("href"));
-//System.out.println("");
-//System.out.println(product.findElement(By.tagName("a")).getText());
-//
-//}
+}
+return productslist;
 } catch (Exception e) {
 System.out.println("error " + e);
+return Collections.emptyList();
 }
 }
 
