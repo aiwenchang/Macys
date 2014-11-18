@@ -21,9 +21,6 @@ public class VerifySearchResult {
 	  resultList.getLinks();
   }
   
-  @Test
-  public void verifyResultInfo(){
-  }
   @BeforeClass
   public void beforeClass() {
 		Driver.driver = Driver.browser("firefox");
@@ -32,6 +29,7 @@ public class VerifySearchResult {
 		commonUtil.launchBrowser("http://www.macys.com/");
   }
 
+  
   @AfterClass
   public void afterClass() {
   Driver.driver.quit();
