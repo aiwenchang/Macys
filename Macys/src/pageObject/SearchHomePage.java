@@ -31,7 +31,7 @@ public class SearchHomePage {
 			searchField.clear();
 			searchField.sendKeys(keyword);
 			searchBtn.click();
-			commonUtil.implicitWait(20);
+			commonUtil.implicitWait(10);
 		}catch (Exception e){
 			return false;
 			

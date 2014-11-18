@@ -1,6 +1,7 @@
 package pageObject;
 
 import java.awt.PageAttributes.PrintQualityType;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,33 +11,41 @@ import org.openqa.selenium.support.FindBy;
 
 import util.Driver;
 
-
 public class JeansResultPage {
+	/**
+	 *
+	 * @return
+	 */
 
+	public static List<Data> getLinks() {
+		try {
+			// driver.findElement(By.id("element id"))
+			WebElement landingpage = Driver.driver.findElement(By
+					.id("search_landing_product"));
+			List<WebElement> productslist = landingpage.findElements(By
+					.className("shortDescription"));
 
-/**
-* @param nothing is passed in
- * @return 
-*/
-	
+			ArrayList<Data> res = new ArrayList();
 
-public static List<WebElement> getLinks() {
-try {
-//driver.findElement(By.id("element id"))
-WebElement landingpage = Driver.driver.findElement(By.id("search_landing_product"));
-List<WebElement> productslist =landingpage.findElements(By.className("shortDescription"));
+			for (WebElement product : productslist) {
+				String link = product.findElement(By.tagName("a"))
+						.getAttribute("href");
+				String desc = product.findElement(By.tagName("a")).getText();
+				String brand = desc.substring(0, desc.indexOf(' '));
 
-for (WebElement product : productslist) {
-System.out.println(product.findElement(By.tagName("a")).getAttribute("href"));
-System.out.println(product.findElement(By.tagName("a")).getText());
-System.out.println("");
+				res.add(new Data(link, brand, desc));
+			}
+			return res;
 
-}
-return productslist;
-} catch (Exception e) {
-System.out.println("error " + e);
-return Collections.emptyList();
-}
-}
+		} catch (Exception e) {
+			System.out.println("error " + e);
+			return Collections.emptyList();
+		}
+	}
+	public JeansResultPage nextBtn() {
+ 
+        Driver.driver.findElement(By.id("paginateBottom")).click();
+        return new JeansResultPage ();    
+    }
 
 }
